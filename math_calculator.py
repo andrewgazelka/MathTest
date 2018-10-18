@@ -61,5 +61,32 @@ def approximate_sin_maclauren(rad, iterations):
     return sum
 
 
+def euler_e_val(iterations=1000, dx=0.1, x_i=0, y_i=1):
+    """
+    let us have the equation dy/dx = y, y(0) = 1
+
+    {a}^10
+
+    :return:
+    """
+
+    if iterations == 0:
+        return {
+            "x": x_i,
+            "y": y_i
+        }
+
+    x_i += dx
+    y_i += y_i * dx
+
+    return euler_e_val(iterations - 1, dx, x_i, y_i)
+
+
+def calc_e(iterations=500, dx=1E-10):
+    val = euler_e_val(iterations, dx)
+    e = math.pow(val["y"], 1 / val["x"])
+    return e
+
+
 if __name__ == "__main__":
-    print(approximate_sin_maclauren(math.pi / 4, 1000))
+    print(calc_e())
